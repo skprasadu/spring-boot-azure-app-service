@@ -41,6 +41,7 @@ public class UserController {
 	 */
 	@GetMapping("/users")
 	public List<User> getAllUsers() {
+		System.out.println("*****************");
 		return userService.findAll();
 	}
 

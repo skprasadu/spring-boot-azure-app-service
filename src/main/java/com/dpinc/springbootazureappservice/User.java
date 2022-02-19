@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
  * @author Dhruvesh
  *
  */
-@Entity(name = "USERS")
+@Entity(name = "users")
 @NoArgsConstructor
 @AllArgsConstructor	
 @Data

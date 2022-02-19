@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS USERS;
+DROP TABLE IF EXISTS users;
  
-CREATE TABLE USERS (
+CREATE TABLE users (
   id INT PRIMARY KEY,
   first_name VARCHAR(250) NOT NULL,
   last_name VARCHAR(250) NOT NULL,
@@ -8,11 +8,11 @@ CREATE TABLE USERS (
   status VARCHAR(250) DEFAULT 'ACTIVE' NOT NULL,
   created_by VARCHAR(250) DEFAULT 'SYSTEM' NOT NULL,
   updated_by VARCHAR(250) DEFAULT 'SYSTEM' NOT NULL,
-  created_timestamp VARCHAR(250) DEFAULT sysdate,
-  updated_timestamp VARCHAR(250) DEFAULT sysdate
+  created_timestamp TIMESTAMP DEFAULT NOW(),
+  updated_timestamp TIMESTAMP DEFAULT NOW()
 );
 
-INSERT INTO USERS (id, first_name, last_name, email) 
+INSERT INTO users (id, first_name, last_name, email) 
 VALUES
   (1, 'Virat', 'Kohli', 'virat.kohli@bcci.com'),
   (2, 'Ben', 'Stokes', 'bem.stoles@ecb.com'),
