@@ -15,8 +15,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+//import com.microsoft.applicationinsights.TelemetryClient;
+
 /**
  * Rest Controller for User Controller
+ * 
  * @author Dhruvesh
  *
  */
@@ -28,8 +31,13 @@ public class UserController {
 
 	/**
 	 * To get health of the app
-	 * @return ResponseEntity<String>  - Response entity with HTTP status code
+	 * 
+	 * @return ResponseEntity<String> - Response entity with HTTP status code
 	 */
+
+	/*@Autowired
+	TelemetryClient telemetryClient;*/
+
 	@GetMapping("/health")
 	public ResponseEntity<String> getHealth() {
 		return new ResponseEntity<String>("Successful health check - User Service", HttpStatus.OK);
@@ -37,30 +45,35 @@ public class UserController {
 
 	/**
 	 * To get all users list
+	 * 
 	 * @return List<User> - List of all users
 	 */
 	@GetMapping("/users")
 	public List<User> getAllUsers() {
-		System.out.println("*****************");
+		//telemetryClient.trackEvent("URI /users is triggered");
 		return userService.findAll();
 	}
 
 	/**
 	 * To get user by Id
+	 * 
 	 * @param userId - Unique user id
-	 * @return ResponseEntity<User> - Response Entity with status code and user object
+	 * @return ResponseEntity<User> - Response Entity with status code and user
+	 *         object
 	 */
 	@GetMapping("/users/{id}")
 	public ResponseEntity<User> getUsersById(@PathVariable(value = "id") Long userId) {
 
-		Optional<User> userOptional = userService.findById(userId);	
+		Optional<User> userOptional = userService.findById(userId);
 		return ResponseEntity.ok().body(userOptional.get());
 	}
 
 	/**
 	 * To create new user
+	 * 
 	 * @param user
-	 * @return ResponseEntity<User> - Response Entity with status code and user object
+	 * @return ResponseEntity<User> - Response Entity with status code and user
+	 *         object
 	 */
 	@PostMapping("/users")
 	public ResponseEntity<User> createUser(@RequestBody User user) {
@@ -70,15 +83,16 @@ public class UserController {
 
 	/**
 	 * To update existing user details
+	 * 
 	 * @param userId
 	 * @param userDetails
-	 * @return ResponseEntity<User> - Response Entity with status code and user object
+	 * @return ResponseEntity<User> - Response Entity with status code and user
+	 *         object
 	 */
 	@PutMapping("/users/{id}")
 	public ResponseEntity<User> updateUser(@PathVariable(value = "id") Long userId, @RequestBody User userDetails) {
 
 		User user = userService.findById(userId).get();
-				
 
 		user.setEmail(userDetails.getEmail());
 		user.setLastName(userDetails.getLastName());
@@ -90,8 +104,10 @@ public class UserController {
 
 	/**
 	 * to delete existing user
+	 * 
 	 * @param userId
-	 * @return ResponseEntity<String> - Response Entity with status code and deleted user id
+	 * @return ResponseEntity<String> - Response Entity with status code and deleted
+	 *         user id
 	 */
 	@DeleteMapping("/users/{id}")
 	public ResponseEntity<String> deleteUser(@PathVariable(value = "id") Long userId) {
